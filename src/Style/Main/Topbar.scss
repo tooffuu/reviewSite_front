@@ -145,6 +145,10 @@ header {
   text-underline-offset: 4px;
   color: #000000;
 }
+.username2 {
+  position: relative;
+  top: 24px;
+}
 .welcome_span {
   margin-top: 4px;
 }
@@ -213,7 +217,7 @@ header {
     left: -80px;
   }
   .username1 {
-    top: -126px;
+    top: -138px;
   }
   .username_span {
     display: none;
@@ -233,13 +237,14 @@ header {
     display: none;
   }
   .menu2 {
+    display: block;
     font-family: "NanumSquareNeo-Variable";
     flex-direction: column;
     align-items: flex-start;
     background-color: #ff8725;
     position: relative;
     top: 110px;
-    height: 170px;
+    height: 182px;
     color: white;
   }
   .menu2 > ul li {

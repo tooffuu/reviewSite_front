@@ -56,7 +56,7 @@ const Topbar = () => {
 
         {user ? (
           <>
-            <div className={isOpen ? "menu2" : "menu1"}>
+            <div className={isOpen ? "menu1 menu2" : "menu1"}>
               <ul>
                 <li>
                   <a href={`/myplace/${user.id}`}>MY PLACE</a>

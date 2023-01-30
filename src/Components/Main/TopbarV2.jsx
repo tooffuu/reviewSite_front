@@ -40,8 +40,16 @@ const Topbar = () => {
   const [user, setUser] = useRecoilState(userState);
   const [modal, setModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
+  const [isOpen, setShowMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setShowMenu((isOpen) => !isOpen);
+  };
+
   const logo = "/images/sitelogo.png";
   const logout = "/images/logout.png";
+  const menu = "/images/menu.png";
+  const user3 = "/images/user3.png";
 
   const openModal = () => {
     setModal(true);
@@ -67,7 +75,7 @@ const Topbar = () => {
             <img
               className="siteLogo"
               onClick={() => {
-                window.location.href = "/main ";
+                window.location.href = "/main";
               }}
               src={logo}
               alt="logo"
@@ -77,7 +85,7 @@ const Topbar = () => {
 
         {user ? (
           <>
-            <div className="menu1">
+            <div className={isOpen ? "menu1 menu2" : "menu1"}>
               <ul>
                 <li>
                   <a href={`/myplace/${user.id}`}>MY PLACE</a>
@@ -94,7 +102,9 @@ const Topbar = () => {
               </ul>
             </div>
             <div className="sign_btn">
-              <p className="username">
+              <div
+                className={isOpen ? "username username1" : "username username2"}
+              >
                 <span
                   className="username_span"
                   onClick={() => {
@@ -103,18 +113,35 @@ const Topbar = () => {
                 >
                   {user && `${user.nickname}`}
                 </span>
-                {user && "님 환영합니다."}
-              </p>
-              <div className="logoutBtn">
-                <img
-                  src={logout}
+                <span className="welcome_span1">{user && "님"}</span>
+                <span className="welcome_span">{user && "님 환영합니다."}</span>
+                <div
+                  className="logoutBtn userBtn"
                   onClick={() => {
-                    if (window.confirm("로그아웃하시겠습니까?")) {
-                      setUser(null);
-                      window.location.href = "/main";
-                    }
+                    window.location.href = "/MypageUserConfirm";
                   }}
-                />
+                >
+                  <img src={user3} />
+                </div>
+                <div className="logoutBtn">
+                  <img
+                    src={logout}
+                    onClick={() => {
+                      if (window.confirm("로그아웃하시겠습니까?")) {
+                        setUser(null);
+                        window.location.href = "/main";
+                      }
+                    }}
+                  />
+                </div>
+                <div
+                  className="logoutBtn menuBtn"
+                  onClick={() => {
+                    toggleMenu();
+                  }}
+                >
+                  <img src={menu} />
+                </div>
               </div>
             </div>
           </>
@@ -124,7 +151,7 @@ const Topbar = () => {
               <div className="loginBtn_wrap">
                 <div className="loginBtn">
                   <h3 onClick={openModal}>로그인</h3>
-                  <div className="openModal">
+                  <div className="loginBtn">
                     {modal && (
                       <Login closeModal={closeModal} openModal2={openModal2} />
                     )}
