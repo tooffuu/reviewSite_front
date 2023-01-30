@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 
-const Detailmap = ({ mappgRef }) => {
+const Detailmap = ({ mappgRef, reviewRef }) => {
   const { kakao } = window;
   //-----------------------------------------------
 
@@ -17,9 +17,11 @@ const Detailmap = ({ mappgRef }) => {
   }, []);
 
   return (
-    <div>
-      <div className="maptext">위치정보</div>
-      <div className="rode_api1" id="map" ref={mappgRef}></div>
+    <div className="map_wrap">
+      <div className="maptext" ref={mappgRef}>
+        위치정보
+      </div>
+      <div className="rode_api1" id="map" ref={reviewRef}></div>
     </div>
   );
 };

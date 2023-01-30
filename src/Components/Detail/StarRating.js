@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../../utils";
 import { useRecoilState } from "recoil";
@@ -14,14 +14,16 @@ const StarRating = () => {
   const [hover, setHover] = useState(0);
   const [user, setUser] = useRecoilState(userState);
   const [content, setContent] = useState("");
-  const [flies, setFlies] = useState([]);
+  const [files, setFlies] = useState([]);
+
+  const picture = "/images/pictureInput.png";
 
   //-----------------------------------------------
   const [nickname, setNickname] = useState("");
   const [Click, setClick] = useState(false);
 
   function setting() {
-    setNickname(user.nickname);
+    setNickname(user?.nickname);
   }
   useEffect(() => {
     setting();
@@ -39,28 +41,39 @@ const StarRating = () => {
     formData.append("detail_name", detail_name);
     formData.append("star", star);
     formData.append("nickname", nickname);
-    for (let i = 0; i < flies.length; i++) {
-      formData.append("files", flies[i]);
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
     }
 
-    if (window.confirm("등록하시겠습니까?"))
-      try {
-        const data = await axios({
-          url: `${BACKEND_URL}/answer/create/post?userId=${user.id}`,
-          method: "POST",
-          data: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-        window.location.reload();
-      } catch (e) {
-        console.log(e);
-        alert("값 입력 실패");
+    if (window.confirm("등록하시겠습니까?")) {
+      if (files.length > 5) {
+        alert("사진은 5개까지만 등록가능합니다.");
+        return;
+      } else {
+        try {
+          const data = await axios({
+            url: `${BACKEND_URL}/answer/create/post?userId=${user.id}`,
+            method: "POST",
+            data: formData,
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+
+          window.location.reload();
+        } catch (e) {
+          console.log(e);
+          alert("값 입력 실패");
+        }
       }
+    }
   };
+
   const message = () => {
-    if (content == "") {
+    if (!user) {
+      alert("로그인을 해주세요.");
+      return;
+    } else if (content == "") {
       alert("내용을 입력해주세요");
     } else if (star == 0) {
       alert("평점을 입력해주세요");
@@ -68,65 +81,81 @@ const StarRating = () => {
       post();
     }
   };
+
   const onSubmit = (e) => {
     setFlies(e.target.files);
   };
   const onContent = (e) => {
     setContent(e.target.value);
   };
+
+  // 이미지 업로드 커스텀
+  const imageInput = useRef();
+  const onCickImageUpload = () => {
+    imageInput?.current.click();
+  };
+
   return (
-    <div>
-      <div className="star-rating">
-        평점 :　
-        {[...Array(5)].map((star, index) => {
-          index += 1;
-          return (
-            <button
-              type="button"
-              key={index}
-              className={index <= (hover || rating) ? "on" : "off"}
-              onClick={() => setRating(index)}
-              onMouseEnter={() => setHover(index)}
-              onMouseLeave={() => setHover(rating)}
-            >
-              <span className="star">&#9733;</span>
-            </button>
-          );
-        })}
+    <div className="write_review_div">
+      <div className="review_components">
+        {user ? (
+          <textarea
+            className="comment_textarea"
+            placeholder="리뷰를 작성해주세요."
+            onChange={onContent}
+            spellCheck="false"
+            cols="50"
+            rows="10"
+          />
+        ) : (
+          <textarea
+            className="comment_textarea"
+            placeholder="로그인 후 리뷰를 작성할 수 있습니다."
+            onChange={onContent}
+            spellCheck="false"
+            cols="50"
+            rows="10"
+          />
+        )}
         <input
+          ref={imageInput}
           className="fileupload"
           type="file"
           multiple
           onChange={onSubmit}
         />
+        <img
+          className="pictureInput"
+          onClick={onCickImageUpload}
+          src={picture}
+          alt="사진"
+        />
+        <div className="starRate">
+          평점 :{"  "}
+          {[...Array(5)].map((star, index) => {
+            index += 1;
+            return (
+              <button
+                type="button"
+                key={index}
+                className={index <= (hover || rating) ? "on" : "off"}
+                onClick={() => setRating(index)}
+                onMouseEnter={() => setHover(index)}
+                onMouseLeave={() => setHover(rating)}
+              >
+                <span className="star">&#9733;</span>
+              </button>
+            );
+          })}
+        </div>
         <button
-          className="plugin"
+          className="writeInput"
           onClick={() => {
             message();
           }}
         >
-          <img src="/images/입력.png" />
+          등록
         </button>
-      </div>
-      <div className="사용자">
-        <div className="usercon">
-          <div className="userimg">
-            <img className="usersimg" src={user.userImgUrl} alt="" />
-          </div>
-          <div>{user && user.nickname}</div>
-        </div>
-        <textarea
-          className="comment_textarea"
-          onChange={onContent}
-          cols="50"
-          rows="10"
-        ></textarea>
-      </div>
-      <div className="imgsee">
-        <div className="imgcons"></div>
-        <div className="imgcontent">
-          <img src="" alt="" />
-        </div>{" "}
       </div>
     </div>
   );

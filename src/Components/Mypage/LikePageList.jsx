@@ -17,14 +17,25 @@ const LikePageList = ({ likePost }) => {
           }}
         />
         <div className="list_info_wrap">
-          <div
-            className="post_Name"
-            onClick={() => {
-              window.location.href = `${LOCAL_URL}/Detail/${name}/${id}`;
-            }}
-          >
-            {name}
-          </div>
+          {name?.length > 12 ? (
+            <div
+              className="post_Name post_Name2"
+              onClick={() => {
+                window.location.href = `${LOCAL_URL}/Detail/${name}/${id}`;
+              }}
+            >
+              {name}
+            </div>
+          ) : (
+            <div
+              className="post_Name"
+              onClick={() => {
+                window.location.href = `${LOCAL_URL}/Detail/${name}/${id}`;
+              }}
+            >
+              {name}
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -19,6 +19,9 @@ a {
   justify-content: space-between;
   z-index: 10000;
 }
+header {
+  transition: all 0.5s;
+}
 .menuBar {
   font-family: "NanumSquareNeo-Variable";
   position: absolute;
@@ -62,95 +65,106 @@ a {
   font-size: 17px;
   left: -15px;
 }
-.loginBtn {
-  color: white;
+.sign_btn {
+  position: relative;
+  width: 400px;
+  left: 80vw;
+}
+.loginBtn_wrap {
+  position: absolute;
+  top: 32px;
+}
+.loginBtn_wrap > div {
+  font-family: "NanumSquareNeo-Variable";
+  position: relative;
+  display: inline-block;
+  background-color: white;
+  padding: 0 12px;
+  border-radius: 20px;
+  color: #ff8725;
   cursor: pointer;
   font-size: 15px;
-  margin-left: 10px;
-  margin-top: 4px;
+  left: 60px;
+  margin-right: 10px;
 }
 .logoutBtn {
+  position: relative;
+  left: 20px;
+}
+.logoutBtn > img {
+  filter: invert(100%) sepia(0%) saturate(7422%) hue-rotate(143deg)
+    brightness(117%) contrast(95%);
+  cursor: pointer;
+  width: 24px;
+}
+.logoutBtn > img:hover {
+  transition: transform 300ms;
+  transform: scale(1.2);
+}
+.signUpBtn {
+  margin-right: 10px;
+}
+.menu1 > ul li {
+  font-family: "NanumSquareNeo-Variable";
+  cursor: pointer;
+  margin-right: 12px;
+  font-size: 18px;
+  top: 44px;
+  left: 224px;
   color: white;
-  cursor: pointer;
 }
-.menu1 > ul {
-  cursor: pointer;
-  position: absolute;
-  top: 17px;
-  left: 50px;
-}
-.menu_h3 {
-  position: relative;
-  top: 4px;
-}
-// 2차 메뉴 아이템
-.menu1 > ul > ul > li {
-  background-color: rgb(255, 255, 255);
-  position: relative;
-  transform: translateX(-50%);
-  min-width: 180px;
-  display: none;
-  left: 50%;
-  padding: 10px 0;
-  font-size: 15px;
-  text-align: left;
-  color: rgb(53, 53, 53);
-  border: 1px solid rgba(203, 202, 202, 0.767);
-  border-radius: 10px;
-}
-.menu1 > ul > ul > li:last-child {
-  border-bottom: 1px solid gray;
-}
-.menu1 > ul > ul > li > a {
-  padding: 12px 20px;
-}
-.menu1 > ul:hover ul li {
-  display: block;
-}
-.menu1 > ul ul > li:hover {
-  background-color: #ff9d4d;
+.menu1 > ul li > a:hover {
+  color: rgb(0, 0, 0);
 }
 
-// 2차 메뉴아이템 구현 완료
 .TiThMenu {
   position: absolute;
   top: 25px;
   right: 45px;
 }
-.show_user {
-  font-family: "NanumSquareNeo-Variable";
-  justify-content: space-between;
-  position: relative;
-  text-align: center;
-  height: 0px;
-  margin-top: 218px;
-  margin-left: 400px;
-}
 .username {
-  min-width: 300px;
+  position: relative;
+  display: flex;
+  font-family: "NanumSquareNeo-Variable";
+  max-height: 60px;
+  max-width: 400px;
   font-size: 18px;
-  font-weight: bold;
   color: white;
+  left: 0vw;
+  top: -4px;
+  z-index: 1000;
+  text-align: right;
 }
 .username_span {
-  text-decoration: underline;
   margin-right: 4px;
-  padding: 2px;
+  margin-top: 4px;
   cursor: pointer;
-  text-underline-offset: 4px;
 }
 .username_span:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
   color: #000000;
+}
+.welcome_span {
+  margin-top: 4px;
+}
+.welcome_span1 {
+  display: none;
 }
 .now_location {
   position: relative;
-  margin-top: -208px;
   display: flex;
   justify-content: start;
   align-items: center;
-  left: 50vw;
-  width: 800px;
+  top: 24px;
+  left: -280px;
+  max-width: 280px;
+  max-height: 60px;
   z-index: 999;
+}
+.now_location2 {
+  position: relative;
+  top: 42px;
 }
 .BiCurrentLocation {
   position: relative;
@@ -166,11 +180,80 @@ a {
   color: rgba(243, 243, 243, 0.8);
   display: inline-block;
 }
-.TestCenter2 {
-  position: relative;
-  top: 0px;
+.userBtn {
+  display: none;
 }
-.now_location2 {
-  position: relative;
-  margin-top: -175px;
+.menuBtn {
+  display: none;
+}
+
+@media screen and (max-width: 1350px) {
+  .welcome_span {
+    display: none;
+  }
+  .welcome_span1 {
+    display: block;
+    position: relative;
+    top: 4px;
+  }
+}
+@media screen and (max-width: 1250px) {
+  .now_location {
+    display: none;
+  }
+  .username {
+    position: relative;
+    top: 24px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .username {
+    position: relative;
+    top: 44px;
+    left: -80px;
+  }
+  .username1 {
+    top: -126px;
+  }
+  .username_span {
+    display: none;
+  }
+  .welcome_span1 {
+    display: none;
+  }
+  .userBtn {
+    display: block;
+    margin-right: 20px;
+  }
+  .menuBtn {
+    display: block;
+    margin-left: 20px;
+  }
+  .menu1 {
+    display: none;
+  }
+  .menu2 {
+    font-family: "NanumSquareNeo-Variable";
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #ff8725;
+    position: relative;
+    top: 110px;
+    height: 170px;
+    color: white;
+  }
+  .menu2 > ul li {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-top: 1px solid white;
+    position: relative;
+    top: 0;
+    width: 100%;
+    padding: 12px 0;
+    left: 0;
+  }
+  .menu2 > ul li:last-child {
+    border-bottom: 1px solid white;
+  }
 }

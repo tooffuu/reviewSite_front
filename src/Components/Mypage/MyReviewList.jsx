@@ -11,17 +11,22 @@ const MyReviewList = ({ index, comment }) => {
       <tbody>
         <tr>
           <td>{index + 1}</td>
-          <th
-            className="review_place_name"
-            onClick={() => {
-              window.location.href = `${LOCAL_URL}/Detail/${name}/${id}`;
-            }}
-          >
-            <p>{name}</p>
+          <th className="review_place_name">
+            <p
+              onClick={() => {
+                window.location.href = `${LOCAL_URL}/Detail/${name}/${id}`;
+              }}
+            >
+              {name}
+            </p>
           </th>
-          <th className="comment">{comment.content}</th>
+          <th className="comment">
+            {comment?.content.length < 100
+              ? comment.content
+              : comment.content.slice(0, 30) + "..."}
+          </th>
           <td>{date}</td>
-          <td>{comment.star}</td>
+          <td>{comment?.star}</td>
         </tr>
       </tbody>
     </>

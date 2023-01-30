@@ -130,12 +130,11 @@
 }
 .searchInfoName {
   position: relative;
-  display: block;
+  display: inline-block;
   height: 30px;
   left: 30px;
   font-size: 1.2rem;
   font-weight: bold;
-  width: 350px;
   word-break: keep-all;
   cursor: pointer;
 }
@@ -256,8 +255,6 @@
   border-radius: 10px;
 }
 .TopSearchDataList {
-  // overflow-x: hidden;
-  // overflow-y: scroll;
   width: 426px;
   min-height: 100px;
   max-height: 300px;

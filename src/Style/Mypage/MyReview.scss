@@ -49,16 +49,18 @@
   border-top: 1px solid #e7e7e7;
 }
 .MyReview_table_th-num,
-.MyReview_table_th-date,
 .MyReview_table_th_star_score,
 .MyReview_table_th_views {
   width: 100px;
+}
+.MyReview_table_th-date {
+  width: 120px;
 }
 .MyReview_table_th_place {
   width: 200px;
 }
 .MyReview_table_th-title {
-  width: 500px;
+  width: 480px;
 }
 .MyReview_table th,
 .MyReview_table td {
@@ -74,9 +76,7 @@
 .review_place_name > p:hover {
   text-decoration: underline;
 }
-.not_found_review {
-  border: 1px solid red;
-}
 .comment {
   font-weight: lighter;
+  width: 480px;
 }

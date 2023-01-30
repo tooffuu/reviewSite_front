@@ -5,11 +5,18 @@ import { BACKEND_URL, LOCAL_URL } from "../../utils";
 import "../../Style/Detail/Comment.scss";
 import { useRecoilState } from "recoil";
 import { userState } from "../../recoil/user";
+import CommentImage from "./CommentImage";
 
-const Comment = ({ reviewlist, nickname, reviewRef }) => {
+const Comment = ({ reviewlist }) => {
   const [user, setUser] = useRecoilState(userState);
   const [nicknameon, setNicknameon] = useState(false);
   const [selectNickname, setSelectNickname] = useState("");
+  const picture = "/images/pictureInput.png";
+
+  const imageInput = useRef();
+  const onCickImageUpload = () => {
+    imageInput.current.click();
+  };
 
   const onSubmoit = (e) => {
     e.preventDefault(); //동작때마다 새로고침 중지
@@ -52,6 +59,7 @@ const Comment = ({ reviewlist, nickname, reviewRef }) => {
       alert("값 입력 실패");
     }
   };
+
   const [Click, setClick] = useState(false);
   const toggleClick = () => {
     if (Click === true) {
@@ -72,6 +80,7 @@ const Comment = ({ reviewlist, nickname, reviewRef }) => {
   function setting() {
     setcontent(reviewlist.content);
   }
+
   const outNickneme = useRef();
   useEffect(() => {
     const clickOutside = (e) => {
@@ -99,68 +108,11 @@ const Comment = ({ reviewlist, nickname, reviewRef }) => {
   }, []);
 
   return (
-    <div ref={reviewRef} className="userdiv">
-      <div className="starcreatedate">
-        {/* 별점 ---------------------------------- */}
-        {Click === false && (
-          <div className="star-rating">
-            평점 :　
-            {[...Array(5)].map((star, index) => {
-              index += 1;
-              return (
-                <button
-                  type="button"
-                  key={index}
-                  className={index <= reviewlist.star ? "on" : "off"}
-                >
-                  <span className="star">&#9733;</span>
-                </button>
-              );
-            })}
-          </div>
-        )}
-        {Click === true && (
-          <div className="star-rating">
-            평점 :
-            {[...Array(5)].map((star, index) => {
-              index += 1;
-              return (
-                <button
-                  type="button"
-                  key={index}
-                  className={index <= (hover || rating) ? "on" : "off"}
-                  onClick={() => setRating(index)}
-                  onMouseEnter={() => setHover(index)}
-                  onMouseLeave={() => setHover(rating)}
-                >
-                  <span className="star">&#9733;</span>
-                </button>
-              );
-            })}
-          </div>
-        )}
-        {/* 별점끝------------------------------------ */}
-        {/* 날짜 -------------------------------------- */}
-        <div className="createDate">
-          {reviewlist.createDate.substring(0, 10)}
-          &nbsp;
-          {reviewlist.createDate.substring(11, 16)}
-        </div>
-        {user?.id === reviewlist.user?.id && (
-          <>
-            <button className="textbut">
-              <span onClick={toggleClick}>수정</span>
-            </button>
-            <button className="textbut" onClick={onSubmoit}>
-              <span>삭제</span>
-            </button>
-          </>
-        )}
-        {/* 리뷰 content--------------------------------- */}
-      </div>
+    <>
+      {/* 유저 닉네임 클릭시 나오는 모달창 */}
       {Click === false && (
         <div className="사용자">
-          {nicknameon === true ? (
+          {nicknameon === true && (
             <div className="nameContextMenu" ref={outNickneme}>
               <table className="mbLayer">
                 <tbody>
@@ -195,49 +147,192 @@ const Comment = ({ reviewlist, nickname, reviewRef }) => {
                 </tbody>
               </table>
             </div>
-          ) : null}
-          <div className="usercon">
-            <div className="userimg">
-              <img className="usersimg" src={reviewlist.user.imgUrl} alt="" />
-            </div>
-            <div className="userReview">
-              <span
-                className="review_nick2"
-                onClick={() => {
-                  setNicknameon(true);
-                  setSelectNickname(reviewlist.user?.id);
-                }}
-              >
-                {reviewlist.user?.nickname}
-              </span>
-            </div>
-          </div>
-          <div className="contant">
-            <div>{reviewlist.content}</div>
-          </div>
+          )}
         </div>
       )}
-      {Click === true && (
-        <div className="사용자">
-          <div className="usercon">
-            <div className="userimg">
-              <img className="usersimg" src={reviewlist.user?.imgUrl} alt="" />
-            </div>
-            <div>{reviewlist.nickname}</div>
-          </div>
 
-          <textarea
-            className="editcontent"
-            cols="100"
-            rows="9"
-            value={content}
-            onChange={(e) => setcontent(e.target.value)}
-          >
-            {reviewlist.content}
-          </textarea>
-        </div>
-      )}
-    </div>
+      <div className="userDiv">
+        {Click === false ? (
+          <div className="userReview">
+            <img className="usersImg" src={reviewlist.user.imgUrl} />
+            <span
+              className="review_nick"
+              onClick={() => {
+                setNicknameon(true);
+                setSelectNickname(reviewlist.user?.id);
+              }}
+            >
+              {reviewlist.user?.nickname}
+            </span>
+            <div className="userReviewAndHeart">
+              <span>리뷰 1</span>
+              <span> · 찜 12 </span>
+            </div>
+            {reviewlist?.image.length != 0 ? (
+              // 리뷰 댓글의 이미지가 있을 때
+              <div className="starRateDate">
+                <div className="star-rating">
+                  평점 :　
+                  {[...Array(5)].map((star, index) => {
+                    index += 1;
+                    return (
+                      <button
+                        type="button"
+                        key={index}
+                        className={index <= reviewlist.star ? "on" : "off"}
+                      >
+                        <span className="star">&#9733;</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="createDate">
+                  {reviewlist.createDate.substring(0, 10)}
+                </div>
+              </div>
+            ) : (
+              // 리뷰 댓글의 이미지가 없을 때
+              <div className="starRateDate">
+                <div className="star-rating">
+                  평점 :　
+                  {[...Array(5)].map((star, index) => {
+                    index += 1;
+                    return (
+                      <button
+                        type="button"
+                        key={index}
+                        className={index <= reviewlist.star ? "on" : "off"}
+                      >
+                        <span className="star">&#9733;</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="createDate">
+                  {reviewlist.createDate.substring(0, 10)}
+                </div>
+              </div>
+            )}
+            <div className="image_wrap">
+              {reviewlist?.image.map((photo, index) => (
+                <CommentImage photo={photo} key={index} Click={Click} />
+              ))}
+            </div>
+            <div className="review_content">{reviewlist.content}</div>
+          </div>
+        ) : (
+          <>
+            <div className="userReview">
+              {reviewlist?.image.length != 0 ? (
+                // 리뷰 댓글의 이미지가 있을 때
+                <div className="starRateDate">
+                  <div className="star-rating star-rating2 star-rating3">
+                    평점 :　
+                    {[...Array(5)].map((star, index) => {
+                      index += 1;
+                      return (
+                        <button
+                          type="button"
+                          key={index}
+                          className={index <= (hover || rating) ? "on" : "off"}
+                          onClick={() => setRating(index)}
+                          onMouseEnter={() => setHover(index)}
+                          onMouseLeave={() => setHover(rating)}
+                        >
+                          <span className="star">&#9733;</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                // 리뷰 댓글의 이미지가 없을 때
+                <div className="starRateDate starRateDate2">
+                  <div className="star-rating star-rating2">
+                    평점 :　
+                    {[...Array(5)].map((star, index) => {
+                      index += 1;
+                      return (
+                        <button
+                          type="button"
+                          key={index}
+                          className={index <= (hover || rating) ? "on" : "off"}
+                          onClick={() => setRating(index)}
+                          onMouseEnter={() => setHover(index)}
+                          onMouseLeave={() => setHover(rating)}
+                        >
+                          <span className="star">&#9733;</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+              <div className="image_wrap">
+                {reviewlist?.image.map((photo, index) => (
+                  <CommentImage photo={photo} key={index} />
+                ))}
+              </div>
+              <div className="review_components review_components2">
+                <textarea
+                  className="comment_textarea comment_textarea2"
+                  spellCheck="false"
+                  cols="100"
+                  rows="9"
+                  value={content}
+                  onChange={(e) => setcontent(e.target.value)}
+                >
+                  {reviewlist.content}
+                </textarea>
+                <input
+                  ref={imageInput}
+                  className="fileupload"
+                  type="file"
+                  multiple
+                  // onChange={onSubmit}
+                />
+                <img
+                  className="pictureInput pictureInput2"
+                  onClick={onCickImageUpload}
+                  src={picture}
+                  alt="사진"
+                />
+              </div>
+            </div>
+          </>
+        )}
+        {user?.nickname === reviewlist?.user?.nickname && (
+          <>
+            {Click === false ? (
+              <div className="review_upd_btn">
+                <button className="review_edit_btn" onClick={toggleClick}>
+                  수정
+                </button>
+                <button className="review_delete_btn" onClick={onSubmoit}>
+                  삭제
+                </button>
+              </div>
+            ) : (
+              <div className="review_upd_btn">
+                <button className="review_edit_btn" onClick={toggleClick}>
+                  수정
+                </button>
+                <button
+                  className="review_delete_btn"
+                  onClick={() => {
+                    if (window.confirm("수정을 취소하시겠습니까?") === true) {
+                      setClick(false);
+                    }
+                  }}
+                >
+                  취소
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

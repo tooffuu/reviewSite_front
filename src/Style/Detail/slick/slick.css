@@ -116,13 +116,12 @@ li {
   width: 500px;
   display: block;
   border-top: 1px solid black;
-  /* background: rgba(112, 112, 112, 0.183); */
-  /* text-align: center; */
 }
 .vbox_review {
   font-family: "Noto Sans KR", sans-serif;
 }
 .modal_userImg {
+  border: 1px solid rgb(201, 201, 201);
   width: 50px;
   height: 50px;
   border-radius: 50%;

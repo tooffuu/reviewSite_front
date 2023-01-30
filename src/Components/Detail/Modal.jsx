@@ -45,7 +45,7 @@ const Modal = ({ outSection, images }) => {
               {getimg.map((review) => {
                 return (
                   <div className="SlickItems">
-                    <img src={review.imgUrl} />
+                    <img className="modal_img" src={review.imgUrl} />
                   </div>
                 );
               })}
@@ -60,8 +60,11 @@ const Modal = ({ outSection, images }) => {
             >
               {getimg.map((review) => {
                 return (
-                  <div className="PagingAnchor">
-                    <img src={review.imgUrl} />
+                  <div className="PagingAnchor modal_pagingAnchor">
+                    <img
+                      className="modal_pagingAnchor_img"
+                      src={review.imgUrl}
+                    />
                   </div>
                 );
               })}
@@ -78,9 +81,6 @@ const Modal = ({ outSection, images }) => {
           {getimg.map((review) => {
             const answerDate = review?.answer?.createDate;
             const date = answerDate.split("T");
-
-            console.log(review);
-
             return (
               <div className="vbox">
                 <img

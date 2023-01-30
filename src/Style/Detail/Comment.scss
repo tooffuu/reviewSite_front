@@ -1,172 +1,198 @@
-.starcreatedate {
-  display: inline-flex;
-  margin-bottom: 10px;
-  width: 100%;
+// 댓글 달기
+.write_review_div {
+  width: 680px;
+  margin-bottom: 20px;
 }
-.createDate {
-  text-align: right;
+.starRate {
   display: inline-block;
-  margin-left: 15%;
-  margin-top: 8px;
-}
-
-// 수정 삭제 버튼
-.textbut {
-  font-family: "NanumSquareNeo-Variable";
-  text-align: center;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 5px;
-  display: inline-flex;
   position: relative;
-  top: 5px;
-  left: 12px;
-  border-radius: 10%;
-  margin-left: 10px;
+  font-size: 14px;
+  top: -6px;
+  color: rgb(61, 61, 61);
 }
-.textbut:hover {
-  transition: transform 400ms ease;
-  transform: scale(1.1);
+.review_components {
+  border: 1px solid rgba(195, 195, 195, 0.858);
+  margin-top: -80px;
+  margin-left: 4px;
+  padding: 10px;
+  width: 670px;
+  height: 128px;
 }
-.textbut::after {
-  transform: translateY(1.1);
+.review_components2 {
+  width: 640px;
+  margin-top: -48px;
 }
-.textbut {
-  border: none;
-  background: rgb(74, 77, 63, 0.3);
-  background: linear-gradient(
-    0deg,
-    rgba(74, 77, 63, 0.3) 0%,
-    rgba(74, 77, 63, 0.3) 100%
-  );
-  color: #fff;
-  overflow: hidden;
+.comment_textarea {
+  font-family: "Noto Sans KR", sans-serif;
+  position: relative;
+  width: 650px;
+  height: 76px;
+  left: -2px;
+  margin-bottom: 4px;
+  border: 0px;
+  padding: 8px;
 }
-.textbut:hover {
-  text-decoration: none;
-  color: #fff;
+.comment_textarea2 {
+  width: 574px;
 }
-.textbut:before {
-  position: absolute;
-  content: "";
-  display: inline-block;
-  top: -180px;
-  left: 0;
-  width: 30px;
-  height: 100%;
-  background-color: #fff;
-  animation: shiny-btn1 3s ease-in-out infinite;
+.fileupload {
+  display: none;
 }
-.textbut:hover {
-  opacity: 0.7;
+.pictureInput {
+  position: relative;
+  top: 4px;
+  width: 28px;
+  margin-right: 20px;
+  cursor: pointer;
+  filter: invert(62%) sepia(1%) saturate(0%) hue-rotate(174deg) brightness(96%)
+    contrast(94%);
 }
-.textbut:active {
-  box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.3),
-    -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
-    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
-    inset 4px 4px 6px 0 rgba(0, 0, 0, 0.2);
+.pictureInput:hover {
+  filter: invert(22%) sepia(81%) saturate(17%) hue-rotate(352deg)
+    brightness(101%) contrast(80%);
 }
-.userdiv {
-  border-top: rgba(74, 77, 63, 0.3) 1.5px solid;
-  margin-bottom: 10px;
-  width: 700px;
-  border-radius: 10px;
+.pictureInput2 {
+  position: relative;
+  top: 78px;
+  right: 600px;
+}
+.writeInput {
+  font-family: "NanumSquareNeo-Variable";
+  background-color: #ff8725;
+  position: relative;
+  border-radius: 4px;
+  padding: 8px 12px;
+  left: 435px;
+  top: -6px;
+  color: white;
 }
 .detail_comment {
-  margin-top: -70px;
   margin-bottom: 120px;
 }
-.detail_comment p {
-  display: inline-block;
-  position: relative;
-  color: rgb(46, 46, 110);
-  left: 20px;
-  bottom: 260px;
-  font-size: 20px;
-}
-
 .userimg {
   display: inline-block;
   height: 150px;
   width: 145px;
   position: relative;
 }
-.사용자 > textarea {
-  position: relative;
-  margin-left: 10px;
-}
-.사용자 > .usercon {
-  display: inline-block;
-}
-.사용자 > .contant {
-  display: inline-block;
-}
-.usercon {
-  width: 215px;
-  max-height: 200px;
-  border-radius: 15px;
-  border: 2px solid rgb(233, 233, 233);
-  overflow: hidden;
-}
-.usercon > div {
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  margin-top: 5px;
-}
 
-.사용자 {
-  display: inline-flex;
-  width: 100%;
-  height: 165px;
-  // margin: 10px 10px 0 10px;
+// 리뷰 component
+.userDiv {
   position: relative;
+  border: 1px solid rgba(215, 215, 215, 0.466);
+  width: 694px;
+  margin-bottom: 12px;
 }
-textarea {
-  width: 740px;
-  font-size: 15px;
-  border: 0;
-  border-radius: 15px;
-  outline: none;
+.userReview {
   padding: 10px;
-  background-color: rgb(233, 233, 233);
 }
-.editcontent {
-  background-color: rgb(212, 237, 205);
+.usersImg {
+  border: 1px solid rgb(215, 215, 215);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }
-hr {
-  margin: 200px 0;
-}
-.contant {
+.review_nick {
   position: relative;
-  width: 740px;
-  font-size: 15px;
-  border: 0;
-  border-radius: 15px;
-  background-color: rgb(233, 233, 233);
-  display: block;
-  padding: 10px;
-  margin-left: 10px;
-}
-
-.userimg {
-  display: block;
-  width: 150px;
-  height: 120px;
-}
-.userimg > img {
-  object-fit: cover;
-  width: 150px;
-  height: 130px;
-}
-.review_nick2 {
-  padding: 5px 0;
+  font-size: 16px;
+  top: -24px;
+  left: 10px;
   cursor: pointer;
 }
-.review_nick2:hover {
+.review_nick:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+.userReviewAndHeart {
+  position: relative;
+  top: -20px;
+  left: 52px;
+  min-width: 100px;
+  width: 100px;
+}
+.userReviewAndHeart > span {
+  font-size: 14px;
+  color: gray;
+}
+.starRateDate {
+  display: inline-flex;
+  position: relative;
+  top: -72px;
+  left: 370px;
+}
+.star-rating2 {
+  position: relative;
+  margin-top: 64px;
+  left: 144px;
+}
+.star-rating3 {
+  position: relative;
+  top: 4px;
+}
+// 이미지 없을 때
+.starRateDate2 {
+  top: -68px;
+}
+.createDate {
+  margin-top: 4px;
+  margin-left: 40px;
+}
+.image_wrap {
+  position: relative;
+  top: -20px;
+  left: 48px;
+}
+.imageBox {
+  display: inline-block;
+}
+.imageBox2 {
+  position: relative;
+  left: 140px;
+}
+.review_img {
+  position: relative;
+  width: 120px;
+  height: 110px;
+  margin-bottom: 40px;
+  margin-right: 4px;
+}
+.image_delete {
+  position: relative;
+  width: 12px;
+  z-index: 100;
+  top: -130px;
+  left: -24px;
+  cursor: pointer;
+  transition: all 0.2s linear;
+}
+.image_delete:hover {
+  transform: scale(1.4);
+}
+.review_content {
+  position: relative;
+  font-family: "Noto Sans KR", sans-serif;
+  width: 90%;
+  left: 48px;
+  margin-top: -24px;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+}
+.review_upd_btn {
+  position: relative;
+  margin-bottom: 10px;
+  left: 590px;
+}
+.review_upd_btn > button {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  border: 1px solid rgba(194, 194, 194, 0.45);
+  padding: 4px 6px;
+}
+.review_upd_btn > button:hover {
+  background-color: rgb(196, 196, 196);
+}
+.review_delete_btn {
+  margin-left: 4px;
 }
 .nameContextMenu {
   background: #000;
@@ -175,10 +201,9 @@ hr {
   z-index: 9999;
   padding: 6px 0;
   position: absolute;
-  left: 130px;
-  bottom: 00px;
-  display: block;
-  overflow: visible;
+  margin-top: 40px;
+  margin-left: 80px;
+  display: inline-block;
 }
 table {
   border-spacing: 0;

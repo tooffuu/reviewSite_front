@@ -374,15 +374,15 @@ const Main = ({
                   >
                     <span className="searchNull">{searchNull}</span>
                     {Places.slice(offset, offset + limit).map((item, i) => (
-                      <ul
-                        className="menulist"
-                        key={item.id}
-                        onClick={() => {
-                          onClickDetailDB(item);
-                        }}
-                      >
+                      <ul className="menulist" key={item.id}>
                         <li className="searchInfoList">
-                          <span href="#!" className="searchInfoName">
+                          <span
+                            href="#!"
+                            className="searchInfoName"
+                            onClick={() => {
+                              onClickDetailDB(item);
+                            }}
+                          >
                             {item.place_name}
                           </span>
                           <span className="searchInfoCategory">
@@ -400,7 +400,7 @@ const Main = ({
                             )}
                             {item.phone ? (
                               <span className="searchInfoPhone">
-                                {item.phone}
+                                📞 {item.phone}
                               </span>
                             ) : null}
                           </div>

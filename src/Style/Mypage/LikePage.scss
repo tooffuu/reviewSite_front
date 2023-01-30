@@ -17,7 +17,6 @@
   position: relative;
   top: 10px;
   text-align: left;
-  left: 100px;
 }
 .like_wrap > p {
   display: inline-block;
@@ -66,12 +65,15 @@
   margin-bottom: 10px;
 }
 .list_info_wrap {
-  font-size: 18px;
   text-align: center;
   margin-top: 3px;
 }
 .post_Name {
+  font-size: 16px;
   cursor: pointer;
+}
+.post_Name2 {
+  font-size: 12px;
 }
 .post_Name:hover {
   text-decoration: underline;

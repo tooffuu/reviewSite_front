@@ -1,5 +1,6 @@
 .detail_back {
-  font-family: "NanumSquareNeo-Variable";
+  font-family: "Noto Sans KR", sans-serif;
+  width: 88%;
 }
 .rod {
   position: relative;
@@ -12,8 +13,8 @@
   position: relative;
   margin-top: 45px;
 }
-
 .body1 {
+  min-width: 700px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,9 +22,10 @@
 .Box {
   text-align: center;
   min-width: 700px;
-  background-color: white;
   display: block;
   margin: 200px auto 200px auto;
+  position: relative;
+  top: -40px;
 }
 .confont {
   position: relative;
@@ -50,22 +52,21 @@
   position: fixed;
   margin: 20px;
   display: block;
-  margin-top: -300px;
+  margin-top: -250px;
   margin-left: 90%;
   z-index: 50;
 }
 .NavGroup > button {
   display: block;
   margin: 20px 0px;
-  /* font-family: "Noto Sans KR", sans-serif; */
-  font-family: "NanumSquareNeo-Variable";
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 1.5rem;
   letter-spacing: -1.2px;
   min-width: 100px;
 }
 .NavGroup > button:hover {
-  transition: transform 300ms ease;
-  transform: scale(1.3);
+  transition: transform 250ms ease;
+  transform: scale(1.4);
   border-bottom-left-radius: 20px;
   border-top-left-radius: 20px;
   color: white;
@@ -87,16 +88,23 @@
   margin-bottom: 20px;
   margin-right: 10px;
 }
+.map_wrap {
+  max-height: 430px;
+}
 .rode_api1 {
   position: relative;
-  width: 700px;
-  height: 450px;
+  width: 600px;
+  height: 400px;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .maptext {
   font-size: 30px;
   text-align: center;
   height: 50px;
-  margin-bottom: 0;
+  top: -200px;
+  position: relative;
   background-color: transparent;
 }
 
@@ -150,10 +158,9 @@ li > img:hover {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: relative;
-  /* overflow: hidden; */
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-60%, -50%);
   max-width: 700px;
   width: auto;
   align-items: center;

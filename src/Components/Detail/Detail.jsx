@@ -17,6 +17,7 @@ import Comment from "./Comment";
 import Detailmap from "./Detailmap";
 import Modal from "./Modal";
 import CenterMode from "./slick/CenterMode";
+
 const Detail = () => {
   //-------------------------------------------------------------------
   //지도 map에 필요한 변수들
@@ -47,15 +48,7 @@ const Detail = () => {
   }
 
   //--------------------------------------------
-
-  const [nickname, setNickname] = useState("");
-
-  function setting() {
-    setNickname(user && user.nickname);
-  }
-
   useEffect(() => {
-    setting();
     getimg();
     get();
   }, []);
@@ -100,7 +93,7 @@ const Detail = () => {
   const review = () =>
     reviewRef.current.scrollIntoView({
       behavior: "smooth",
-      block: "end",
+      block: "start",
     });
 
   //------------------------------------------------------------------
@@ -146,34 +139,32 @@ const Detail = () => {
       document.removeEventListener("mousedown", clickOutside);
     };
   }, [modal]);
-  //----------------------------------------------------
 
   return (
     <>
       <TopbarV2 />
-      {modal === true ? (
-        <div
-          className="zin"
-          onClick={(e) => {
-            if (outSection.current == e.target) {
-              setModal(false);
-            }
-          }}
-        >
-          <Modal outSection={outSection} images={images} />
-        </div>
-      ) : null}
       <div className="detail_back">
         <div className="wrap" ref={photosRef}>
-          {images.length === 0 ? null : (
+          {images.length != 0 ? (
             <CenterMode images={images} setModal={setModal} modal={modal} />
-          )}
-          {images.length === 0 ? (
+          ) : (
             <div className="noimg">
               <img src="/images/noImage.png" />
             </div>
-          ) : null}
+          )}
         </div>
+        {modal === true && (
+          <div
+            className="zin"
+            onClick={(e) => {
+              if (outSection.current == e.target) {
+                setModal(false);
+              }
+            }}
+          >
+            <Modal outSection={outSection} images={images} />
+          </div>
+        )}
         <nav className="styled__TopNav-sc-1tkfz70-1 eUocsG">
           <div className="NavGroup">
             <button onClick={photos}>사진</button>
@@ -192,8 +183,8 @@ const Detail = () => {
               <div className="maps_info">
                 <div className="group left" ref={detailRef}>
                   <div>평점</div>
-                  {detailData.road_address_name != "" ? <div>주소</div> : null}
-                  {detailData.phone != "" ? <div>연락처</div> : null}
+                  {detailData.road_address_name != "" && <div>주소</div>}
+                  {detailData.phone != "" && <div>연락처</div>}
                 </div>
                 <div className="group right">
                   <StarRate />
@@ -203,18 +194,16 @@ const Detail = () => {
               </div>
               <UserLike detailData={detailData} />
             </div>
-            <Detailmap place_name={place_name} mappgRef={mappgRef} />
-            {user && <StarRating reviewRef={reviewRef} />}
+            <Detailmap
+              place_name={place_name}
+              mappgRef={mappgRef}
+              reviewRef={reviewRef}
+            />
+            <StarRating />
             <br />
             <div className="detail_comment">
-              <p>😎 댓글달기</p>
               {reversedgetdata.map((reviewlist, index) => (
-                <Comment
-                  reviewlist={reviewlist}
-                  key={index}
-                  nickname={nickname}
-                  reviewRef={reviewRef}
-                />
+                <Comment reviewlist={reviewlist} key={index} />
               ))}
             </div>
           </div>

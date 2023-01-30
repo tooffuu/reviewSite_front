@@ -43,16 +43,17 @@ const CenterMode = ({ images, modal, setModal }) => {
   const next = useCallback(() => slickRef.current.slickNext(), []);
   return (
     <div className="test">
-      <Slider ref={slickRef} {...settings}>
-        {img.map((v, i) => {
-          return (
-            <div className="SlickItems">
-              <img src={v.imgUrl} />
-            </div>
-          );
-        })}
-      </Slider>
       <>
+        <Slider ref={slickRef} {...settings}>
+          {img.map((v, i) => {
+            return (
+              <div className="SlickItems">
+                <img src={v.imgUrl} />
+              </div>
+            );
+          })}
+        </Slider>
+
         {/* <button className="PrevButton" onClick={previous}></button>
         <button className="NextButton" onClick={next}></button> */}
       </>

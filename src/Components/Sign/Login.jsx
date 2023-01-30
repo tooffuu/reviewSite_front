@@ -26,7 +26,7 @@ const Login = ({ closeModal, openModal2 }) => {
       setPassword("");
       setUser(data.data);
       alert("로그인 성공!😊");
-      window.location.href = "/main";
+      window.location.reload();
     } catch (e) {
       console.log(e);
       alert("로그인 실패! 아이디 또는 비밀번호를 확인하세요.");
@@ -39,15 +39,14 @@ const Login = ({ closeModal, openModal2 }) => {
       <div className="login_body">
         <div className="loginTemplate">
           <div className="signUpLogo">
-            <p>로그인</p>
+            <p className="loginP">로그인</p>
             <img
               src={closeModalBtn}
               className="closeModal"
               onClick={closeModal}
             />
           </div>
-
-          <div className="signUpForm">
+          <div className="signUpForm loginForm">
             <form onSubmit={loginUser}>
               <div>
                 ID

@@ -66,7 +66,7 @@ const SignUp = ({ openModal, closeModal2 }) => {
       <div className="signUpbody">
         <div className="signUptemplate">
           <div className="signUpLogo">
-            <p className="signUpP">회원가입</p>
+            <p className="signUpP loginP">회원가입</p>
             <img
               src={closeModalBtn}
               className="closeModal closeModal2"
@@ -236,6 +236,9 @@ const SignUp = ({ openModal, closeModal2 }) => {
                   중복확인
                 </button>
               </div>
+              <button type="submit" className="signUpButton signUpButton2">
+                가입하기
+              </button>
               <button
                 className="signUpButton loginButton"
                 onClick={() => {
@@ -244,9 +247,6 @@ const SignUp = ({ openModal, closeModal2 }) => {
                 }}
               >
                 로그인하기
-              </button>
-              <button type="submit" className="signUpButton signUpButton2">
-                가입하기
               </button>
             </form>
           </div>

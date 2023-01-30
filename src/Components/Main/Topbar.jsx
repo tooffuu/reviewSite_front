@@ -11,8 +11,16 @@ const Topbar = () => {
   const [user, setUser] = useRecoilState(userState);
   const [modal, setModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
+  const [isOpen, setShowMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setShowMenu((isOpen) => !isOpen);
+  };
 
   const logo = "/images/sitelogo.png";
+  const logout = "/images/logout.png";
+  const menu = "/images/menu.png";
+  const user3 = "/images/user3.png";
 
   const openModal = () => {
     setModal(true);
@@ -44,78 +52,32 @@ const Topbar = () => {
               alt="logo"
             />
           </div>
-          <div className="menuList">
-            <div className="menu1">
+        </div>
+
+        {user ? (
+          <>
+            <div className={isOpen ? "menu2" : "menu1"}>
               <ul>
-                <li className="menu1_li">
-                  <TiThMenu className="TiThMenu" />
-                  <h3 className="menu_h3">메뉴</h3>
+                <li>
+                  <a href={`/myplace/${user.id}`}>MY PLACE</a>
                 </li>
-                <ul>
-                  <li>
-                    <a href="/main">🌍 메인페이지</a>
-                  </li>
-                  {user && (
-                    <>
-                      <li>
-                        <a href={`/myplace/${user.id}`}>🔰 MY PLACE</a>
-                      </li>
-                      <li>
-                        <a href="/likePage">💖 내가 찜한 가게</a>
-                      </li>
-                      <li>
-                        <a href="/MyReview">📝 내가 작성한 리뷰</a>
-                      </li>
-                      <li>
-                        <a href="/MypageUserConfirm">🙋🏻‍♀️ 마이페이지</a>
-                      </li>
-                    </>
-                  )}
-                  {user && user.userRole === "ADMIN" ? (
-                    <li>
-                      <a href="/main" className="admin_site">
-                        관리하기
-                      </a>
-                    </li>
-                  ) : null}
-                </ul>
+                <li>
+                  <a href="/likePage">내가 찜한 가게</a>
+                </li>
+                <li>
+                  <a href="/MyReview">내가 작성한 리뷰</a>
+                </li>
+                <li>
+                  <a href="/MypageUserConfirm">마이페이지</a>
+                </li>
               </ul>
             </div>
-            <div className="menu1 sign_btn">
-              <div className="loginBtn">
-                <h3 onClick={openModal}>{!user && "로그인"}</h3>
-                <div className="openModal">
-                  {modal ? (
-                    <Login closeModal={closeModal} openModal2={openModal2} />
-                  ) : null}
-                </div>
-                <h3
-                  className="logoutBtn"
-                  onClick={() => {
-                    if (window.confirm("로그아웃하시겠습니까?")) {
-                      setUser(null);
-                      window.location.href = "/main";
-                    }
-                  }}
-                >
-                  {user && "로그아웃"}
-                </h3>
+            <div className="sign_btn">
+              <div className="now_location">
+                <BiCurrentLocation className="BiCurrentLocation" />
+                <span id="centerAddr" className="TestCenter"></span>
               </div>
-              <div className="loginBtn signUpBtn">
-                {!user && <h3 onClick={openModal2}>회원가입</h3>}
-                <div className="openModal">
-                  {signUpModal ? (
-                    <SignUp openModal={openModal} closeModal2={closeModal2} />
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="show_user">
-          {user?.username ? (
-            <>
-              <p className="username">
+              <div className={isOpen ? "username username1" : "username"}>
                 <span
                   className="username_span"
                   onClick={() => {
@@ -124,22 +86,66 @@ const Topbar = () => {
                 >
                   {user && `${user.nickname}`}
                 </span>
-                {user && "님 환영합니다."}
-              </p>
-              <div className="now_location">
+                <span className="welcome_span1">{user && "님"}</span>
+                <span className="welcome_span">{user && "님 환영합니다."}</span>
+                <div
+                  className="logoutBtn userBtn"
+                  onClick={() => {
+                    window.location.href = "/MypageUserConfirm";
+                  }}
+                >
+                  <img src={user3} />
+                </div>
+                <div className="logoutBtn">
+                  <img
+                    src={logout}
+                    onClick={() => {
+                      if (window.confirm("로그아웃하시겠습니까?")) {
+                        setUser(null);
+                        window.location.href = "/main";
+                      }
+                    }}
+                  />
+                </div>
+                <div
+                  className="logoutBtn menuBtn"
+                  onClick={() => {
+                    toggleMenu();
+                  }}
+                >
+                  <img src={menu} />
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="sign_btn">
+              <div className="now_location now_location2">
                 <BiCurrentLocation className="BiCurrentLocation" />
                 <span id="centerAddr" className="TestCenter"></span>
               </div>
-            </>
-          ) : (
-            <>
-              <div className="now_location now_location2">
-                <BiCurrentLocation className="BiCurrentLocation" />
-                <span id="centerAddr" className="TestCenter TestCenter2"></span>
+              <div className="loginBtn_wrap">
+                <div className="loginBtn">
+                  <h3 onClick={openModal}>로그인</h3>
+                  <div className="loginBtn">
+                    {modal && (
+                      <Login closeModal={closeModal} openModal2={openModal2} />
+                    )}
+                  </div>
+                </div>
+                <div className="signUpBtn">
+                  <h3 onClick={openModal2}>회원가입</h3>
+                  <div className="openModal">
+                    {signUpModal && (
+                      <SignUp openModal={openModal} closeModal2={closeModal2} />
+                    )}
+                  </div>
+                </div>
               </div>
-            </>
-          )}
-        </div>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

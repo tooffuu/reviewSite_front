@@ -1,5 +1,5 @@
 .on {
-  color: rgba(239, 30, 30, 0.922);
+  color: #ff8725;
   background-color: transparent;
   border: none;
   outline: none;
@@ -16,36 +16,12 @@
   font-size: 20px;
   margin: auto;
 }
-.star-rating {
-  margin-left: 25%;
-}
-
-.plugin {
-  vertical-align: middle;
-  position: relative;
-  margin-left: 6%;
-  bottom: -1px;
-}
 .buttt {
   margin-left: 75%;
   position: relative;
   height: 0.1;
   width: 0.1;
 }
-.plugin > img {
-  height: 30px;
-  width: 30px;
-}
-.comment_textarea {
-  font-family: "NanumSquareNeo-Variable";
-}
-.fileupload {
-  margin-left: 10%;
-}
-.imgsee {
-  height: 50px;
-}
-
 .star_rate_wrap {
   margin-bottom: -30px;
 }
