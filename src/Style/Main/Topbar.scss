@@ -73,18 +73,18 @@ header {
 .loginBtn_wrap {
   position: absolute;
   top: 32px;
+  display: flex;
 }
 .loginBtn_wrap > div {
   font-family: "NanumSquareNeo-Variable";
   position: relative;
-  display: inline-block;
   background-color: white;
   padding: 0 12px;
   border-radius: 20px;
   color: #ff8725;
   cursor: pointer;
   font-size: 15px;
-  left: 60px;
+  left: 0px;
   margin-right: 10px;
 }
 .logoutBtn {
@@ -161,7 +161,7 @@ header {
   justify-content: start;
   align-items: center;
   top: 24px;
-  left: -280px;
+  left: -300px;
   max-width: 280px;
   max-height: 60px;
   z-index: 999;
@@ -208,6 +208,9 @@ header {
   .username {
     position: relative;
     top: 24px;
+  }
+  .loginBtn_wrap {
+    left: -80px;
   }
 }
 @media screen and (max-width: 900px) {
@@ -260,5 +263,8 @@ header {
   }
   .menu2 > ul li:last-child {
     border-bottom: 1px solid white;
+  }
+  .loginBtn_wrap {
+    left: -100px;
   }
 }
