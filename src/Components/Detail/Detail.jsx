@@ -29,15 +29,15 @@ const Detail = () => {
   const [detailData] = KakaoSearchDB(detailsearch);
 
   //업종별 카테고리 문자열 원하는것만 출력
-  var str = dataildata.category_name;
-  var words = str.split(">"); // ">" 구분으로 배열로 변환
-  var word1 = str.substring(0, str.indexOf(">"));
-  var word2 = str.substring(
-    str.indexOf(">") + 1,
-    str.indexOf(">", str.indexOf(">") + 1)
+  var str = dataildata?.category_name;
+  var words = str?.split(">"); // ">" 구분으로 배열로 변환
+  var word1 = str?.substring(0, str.indexOf(">"));
+  var word2 = str?.substring(
+    str?.indexOf(">") + 1,
+    str?.indexOf(">", str.indexOf(">") + 1)
   );
-  var word3 = str.substring(str.lastIndexOf(">") + 1);
-  const count = dataildata.category_name
+  var word3 = str?.substring(str.lastIndexOf(">") + 1);
+  const count = dataildata?.category_name
     .match(/>/g)
     .filter((item) => item !== "").length; // ">"겟수 카운터
   var keystr; // ">"갯수에 따라 출력
